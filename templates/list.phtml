@@ -1,0 +1,86 @@
+<?php //echo "here";  var_dump($userslist); exit;?>
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Users</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a href="/add-user-form" class="close-add"><i class="fa fa-plus"></i> Register User</a></li>
+                <li><a class="close-add activate_user"><i class="fa fa-plus"></i> Activate</a></li>
+                <li><a class="close-add delete_user"><i class="fa fa-remove"></i> Delete</a></li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table">
+                  <thead>
+                    <tr class="headings">
+                      <th>
+                        <input type="checkbox" id="check-all" class="flat">
+                      </th>
+                      <th class="column-title">User Id </th>
+                      <th class="column-title">Full Name </th>
+                      <th class="column-title">Username</th>
+                      <th class="column-title">Email</th>
+                      <th class="column-title">AddedDate</th>
+                      <th class="column-title">ModifiedDate</th>
+                      <th class="column-title">Status</th>  
+                      <th class="column-title">Action</th>                      
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  <?php 
+                  if(isset($userslist) && is_array($userslist) && count($userslist) > 0 ) { 
+                    
+                    foreach($userslist as $key=>$val) {
+                      $cls = '';
+                      if( ($key%2) == 0) 
+                      {
+                        $cls = 'even';
+                      }else{
+                        $cls = 'odd';
+                      }
+                    ?>
+
+                    <tr class="<?php echo $cls;?> pointer">
+                      <td class="a-center ">
+                        <input type="checkbox" class="flat user_id_chk" name="table_records" rel="<?php echo isset($val['user_id']) ? $val['user_id']:'';?>">
+                      </td>
+                      <td class=" userid" ><?php echo isset($val['user_id']) ? $val['user_id']:'';?></td>
+                      <td class=" "><?php echo isset($val['full_name']) ? $val['full_name']:'';?></td>
+                      <td class=" "><?php echo isset($val['user_name']) ? $val['user_name']:'';?></td>
+                      <td class=" "><?php echo isset($val['email']) ? $val['email']:'';?></td>
+                      <td class=" "><?php echo isset($val['date_added']) ? date ( "d-m-Y H:i:s" , strtotime ( $val['date_added'] )):'';?></td>
+                      <td class=" "><?php echo isset($val['date_modified']) ? date ( "d-m-Y H:i:s" , strtotime ( $val['date_modified'] )):'';?></td>
+                      <td class=" "><?php echo isset($val['is_deleted']) && $val['is_deleted']!= 1 ? 'Active':'Inactive';?></td>
+                      <td class=" last edit_user" style="cursor: pointer;" rel="<?php echo isset($val['user_id']) ? $val['user_id']:'';?>"> Edit </td>
+                    </tr>                   
+                    
+                 <?php } 
+                      
+                    } else { ?>
+
+                      <tr class="">
+                        <td class=" "><h3>NO RECORDS FOUND </h3></td>                         
+                      </tr>
+
+                  <?php  } ?>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- /page content -->

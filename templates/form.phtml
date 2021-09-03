@@ -1,0 +1,109 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<?php 
+$userdata = isset($edituserdata['userdata']) ? $edituserdata['userdata'] : array();
+?>
+<style>
+  .Short {  
+    width: 100%;  
+    background-color: #dc3545;  
+    margin-top: 5px;  
+    height: 3px;  
+    color: #dc3545;  
+    font-weight: 500;  
+    font-size: 12px;  
+}  
+.Weak {  
+    width: 100%;  
+    background-color: #ffc107;  
+    margin-top: 5px;  
+    height: 3px;  
+    color: #ffc107;  
+    font-weight: 500;  
+    font-size: 12px;  
+}  
+.Good {  
+    width: 100%;  
+    background-color: #28a745;  
+    margin-top: 5px;  
+    height: 3px;  
+    color: #28a745;  
+    font-weight: 500;  
+    font-size: 12px;  
+}  
+.Strong {  
+    width: 100%;  
+    background-color: #d39e00;  
+    margin-top: 5px;  
+    height: 3px;  
+    color: #d39e00;  
+    font-weight: 500;  
+    font-size: 12px;  
+}  
+</style>
+<div class="right_col" role="main">
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><?php echo isset($formtype) ? $formtype : 'Add'; ?> User</small></h2>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <form class="form-horizontal form-label-left" id="adduserform" name="adduserform" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Name*</label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" id="full_name" name="full_name" value="" placeholder="Full Name" required/>
+                      </div>
+                    </div>
+                     <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Email*</label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" id="email" name="email" value="" placeholder="Email" required/>
+                        <div id="emailMessage"></div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">User Name*</label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" id="user_name" name="user_name" value="" placeholder="User Name" required/>
+                        <div id="usernameMessage"></div> 
+                      </div>
+                    </div>
+                    <?php if(isset($formtype) && strtolower($formtype) != 'edit') { ?>
+                      <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Password*</label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" id="password" name="password" value="" placeholder="Password" required/>
+                        <div id="strengthMessage"></div> 
+                      </div>                      
+                    </div>   
+                    <!-- Recaptcha -->
+                    <div style="margin-left:130px!important;" class="g-recaptcha" data-sitekey="your_site_key"></div>
+                    <?php } ?>                    
+                    <br/>                          
+                    <div class="form-group">
+                      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                        <button type="button" class="btn btn-primary" id="cancel_btn">Cancel</button>
+                        <button type="reset" class="btn btn-primary" id="reset_btn">Reset</button>
+                        <?php if(isset($formtype) && $formtype == 'Add') { ?>
+                        <button type="button" class="btn btn-success" id="submit_btn">Submit</button>
+                        <?php } else { ?>
+                        <input type="hidden" name='user_id' id='user_id' value="">
+                        <button type="button" class="btn btn-success" id="update_btn">Update</button>
+                        <?php }  ?>
+                      </div>
+                    </div>
+                  </form>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- /page content
