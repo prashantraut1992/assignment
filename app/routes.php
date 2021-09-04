@@ -139,11 +139,11 @@
         $full_name = isset($postdata['full_name']) ? trim($postdata['full_name']):'';
         $email = isset($postdata['email']) ? trim($postdata['email']):'';
         $user_name = isset($postdata['user_name']) ? trim($postdata['user_name']):'';
-        $password = isset($postdata['password']) ? trim($postdata['password']):'';
+        $password = isset($postdata['password']) ? md5(trim($postdata['password'])):'';
 
     try{
 
-        $sqlI = "INSERT INTO site_users(user_name, password, full_name, email, date_added) VALUES ('$user_name','md5($password)', '$full_name','$email',NOW())";
+        $sqlI = "INSERT INTO site_users(user_name, password, full_name, email, date_added) VALUES ('$user_name','$password', '$full_name','$email',NOW())";
         $query = $this->db->prepare($sqlI);
 
         $query->execute();          
